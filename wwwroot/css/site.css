@@ -1,0 +1,41 @@
+html {
+  font-size: 14px;
+}
+
+.container-fluid{
+    padding-left: 0px;
+}
+
+.navbar-nav{
+    display: felx;
+    align-items: center;
+}
+
+.nav-logo {
+    width: 40px;
+    height: 40px;
+}
+
+.title{
+    color: red;
+    text-align: center;
+}
+
+.paragraph {
+    word-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+    html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
