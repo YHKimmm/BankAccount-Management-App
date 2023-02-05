@@ -3,7 +3,6 @@
 #nullable disable
 
 using ASP.Net_MVC_Assignment.Data;
-using ASP.Net_MVC_Assignment.Data.Services;
 using ASP.Net_MVC_Assignment.Models;
 using ASP.Net_MVC_Assignment.Repositories;
 using Microsoft.AspNetCore.Authentication;
@@ -29,7 +28,7 @@ namespace ASP.Net_MVC_Assignment.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
         private readonly IConfiguration _configuration;
-        private readonly IEmailService _emailService;
+
 
 
         public RegisterModel(
@@ -39,8 +38,7 @@ namespace ASP.Net_MVC_Assignment.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             ApplicationDbContext context,
-            IConfiguration configuration,
-            IEmailService emailService)
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -50,7 +48,6 @@ namespace ASP.Net_MVC_Assignment.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _context = context;
             _configuration = configuration;
-            _emailService = emailService;
         }
 
 
@@ -184,27 +181,12 @@ namespace ASP.Net_MVC_Assignment.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    var response = await _emailService.SendSingleEmail(new Models.ComposeEmailModel
-                    {
-                        FirstName = "Bryaden",
-                        LastName = "Kim",
-                        Subject = "Confirm your email, please check your email inbox",
-                        Email = Input.Email,
-                        Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
-                    });
-
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new
-                        {
-                            email = Input.Email
-                                                  ,
-                            returnUrl = returnUrl
-                                                  ,
-                            DisplayConfirmAccountLink = false
-                        });
-
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {

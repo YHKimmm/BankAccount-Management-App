@@ -1,5 +1,4 @@
 using ASP.Net_MVC_Assignment.Data;
-using ASP.Net_MVC_Assignment.Data.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +16,6 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<IEmailService, EmailService>();
 
 builder.Services.AddSession(options =>
 {
