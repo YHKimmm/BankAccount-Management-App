@@ -12,7 +12,7 @@ var connectionString = builder.Configuration["ConnectionStrings:DefaultConnectio
 var sendgrid = builder.Configuration["SendGrid:ApiKey"];
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite("Data Source=.\\wwwroot\\sql.db"));
+                options.UseSqlite(connectionString));
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
