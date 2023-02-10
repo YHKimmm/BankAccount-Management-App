@@ -1,11 +1,16 @@
 using ASP.Net_MVC_Assignment.Data;
+using ASP.Net_MVC_Assignment.Data.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var adminUserName = builder.Configuration["adminLogin:Username"];
+var adminPassword = builder.Configuration["AdminLogin:Password"];
+var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+var sendgrid = builder.Configuration["SendGrid:ApiKey"];
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite("Data Source=.\\wwwroot\\sql.db"));
 
@@ -16,6 +21,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 builder.Services.AddSession(options =>
 {
