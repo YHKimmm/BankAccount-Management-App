@@ -1,11 +1,9 @@
 {
   "dependencies": {
-    "sqlite1": {
-      "type": "sqlite",
-      "connectionId": "SQLLITE"
-    },
     "mssql1": {
-      "type": "mssql",
+      "secretStore": "AzureAppSettings",
+      "resourceId": null,
+      "type": "mssql.onprem",
       "connectionId": "ConnectionStrings:DefaultConnection"
     }
   }
