@@ -21,6 +21,7 @@ The application also allows them to edit, delete, and view their bank accounts w
 - Implement ASP.NET CORE MVC with entity framework & Identity
 - Manage datbase using Microsoft SQL Server
 - Use Session to track client
+- During the user registration process, utilize Sendgrid to send an email verification.
 - Deployed the web application using Azure
 
 ## Getting started
