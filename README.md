@@ -49,4 +49,4 @@ https://bankaccountmanagement.azurewebsites.net/
 
 ## Preview
 
-![chrome_E5OofbRm30](https://im4.ezgif.com/tmp/ezgif-4-699110a0fb.jpg)
+![bank-account-management-app](https://user-images.githubusercontent.com/102700164/227444942-0b5009be-819d-4a0f-8096-82baf824e3b7.jpg)
